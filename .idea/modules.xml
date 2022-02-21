@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/servicemanagerapi/servicemanagerapi.iml" filepath="$PROJECT_DIR$/servicemanagerapi/servicemanagerapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smt.iml" filepath="$PROJECT_DIR$/smt.iml" />
+    </modules>
+  </component>
+</project>

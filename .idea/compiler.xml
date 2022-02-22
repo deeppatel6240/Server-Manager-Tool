@@ -11,8 +11,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="servicemanagerapi" target="9" />
-      <module name="smt" target="1.8" />
+      <module name="servicemanagerapi" target="11" />
+      <module name="smt" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

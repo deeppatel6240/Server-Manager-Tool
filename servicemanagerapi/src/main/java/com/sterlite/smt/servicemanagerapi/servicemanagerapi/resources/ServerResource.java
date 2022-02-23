@@ -101,6 +101,19 @@ public class ServerResource {
         );
     }
 
+    @PutMapping("/save/{id}")
+    public ResponseEntity<Response> updateServer(@RequestBody @Valid Server server){
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .data(Map.of("Updated", serverService.update(server)))
+                        .message("Server updated successfully")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+
     @GetMapping(path = "/image/{fileName}", produces = IMAGE_PNG_VALUE)
     public byte[] getServerImage(@PathVariable("fileName") String fileName) throws IOException {
         return Files.readAllBytes(Paths.get(

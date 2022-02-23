@@ -79,7 +79,7 @@ public class ServerServiceImpl implements ServerService {
     private String setServerImageUrl() {
         String[] imageNames = {"server0.png", "server1.png", "server2.png", "server3.png", "server4.png"};
         return ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("ServerImages/" + imageNames[new Random().nextInt(5)]).toUriString();
+                .path("/server/image/" + imageNames[new Random().nextInt(5)]).toUriString();
     }
 
     private boolean isReachable(String ipAddress, int port, int timeOut){

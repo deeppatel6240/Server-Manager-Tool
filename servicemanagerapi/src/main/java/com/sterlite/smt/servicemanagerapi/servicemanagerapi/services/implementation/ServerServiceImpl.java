@@ -10,6 +10,7 @@ import com.sterlite.smt.servicemanagerapi.servicemanagerapi.repositories.ServerR
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.services.ServerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -30,6 +31,7 @@ import static java.lang.Boolean.TRUE;
 @Slf4j
 public class ServerServiceImpl implements ServerService {
 
+    @Autowired
     private final ServerRepo serverRepo;
 
     @Override

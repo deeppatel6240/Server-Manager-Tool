@@ -6,7 +6,9 @@ package com.sterlite.smt.servicemanagerapi.servicemanagerapi.repositories;
  */
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.model.Server;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ServerRepo extends JpaRepository<Server, Long> {
     Server findByIpAddress(String ipAddress);
 }

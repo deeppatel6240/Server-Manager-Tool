@@ -10,6 +10,7 @@ import com.sterlite.smt.servicemanagerapi.servicemanagerapi.model.Response;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.model.Server;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.services.implementation.ServerServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,8 @@ import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 @RequestMapping("/server")
 @RequiredArgsConstructor
 public class ServerResource {
+
+    @Autowired
     private final ServerServiceImpl serverService;
 
     @GetMapping("/list")

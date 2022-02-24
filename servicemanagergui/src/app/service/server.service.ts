@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Server } from 'http';
+import { Server } from '../interface/server';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { Status } from '../enum/status.enum';
 import { CustomResponse } from '../interface/custom-response';

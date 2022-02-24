@@ -29,6 +29,10 @@ public class ServicemanagerapiApplication {
 					"http://localhost:8088/server/image/server1.png", Status.SERVER_UP));
 			serverRepo.save(new Server(null, "10.189.23.89", "Windows", "64 GB", "Gaming Env",
 					"http://localhost:8088/server/image/server2.png", Status.SERVER_UP));
+			serverRepo.save(new Server(null, "10.183.70.90", "Mint Linux", "128 GB", "Prod Env",
+					"http://localhost:8088/server/image/server3.png", Status.SERVER_UP));
+			serverRepo.save(new Server(null, "50.189.33.789", "Kali Linux", "256 GB", "Data Env",
+					"http://localhost:8088/server/image/server4.png", Status.SERVER_UP));
 		};
 	}
 

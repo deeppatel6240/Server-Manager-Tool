@@ -26,13 +26,13 @@ public class ServicemanagerapiApplication {
 	CommandLineRunner run(ServerRepo serverRepo){
 		return args -> {
 			serverRepo.save(new Server(null, "10.123.10.12", "Deep Linux", "32 GB", "Working Env",
-					"http://localhost:8088/server/image/server1.png", Status.SERVER_UP));
+					"http://localhost:8080/server/image/server1.png", Status.SERVER_UP));
 			serverRepo.save(new Server(null, "10.189.23.89", "Windows", "64 GB", "Gaming Env",
-					"http://localhost:8088/server/image/server2.png", Status.SERVER_UP));
+					"http://localhost:8080/server/image/server2.png", Status.SERVER_UP));
 			serverRepo.save(new Server(null, "10.183.70.90", "Mint Linux", "128 GB", "Prod Env",
-					"http://localhost:8088/server/image/server3.png", Status.SERVER_UP));
+					"http://localhost:8080/server/image/server3.png", Status.SERVER_UP));
 			serverRepo.save(new Server(null, "50.189.33.789", "Kali Linux", "256 GB", "Data Env",
-					"http://localhost:8088/server/image/server4.png", Status.SERVER_UP));
+					"http://localhost:8080/server/image/server4.png", Status.SERVER_UP));
 		};
 	}
 

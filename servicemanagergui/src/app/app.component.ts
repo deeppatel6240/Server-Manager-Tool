@@ -38,17 +38,19 @@ export class AppComponent implements OnInit {
           this.notifier.onDefault(response.message);
           this.dataSubject.next(response);
           return { dataState: DataState.LOADED_STATE, appData: { ...response, data: { servers: response.data.servers.reverse() } } }
+          // return { dataState: DataState.LOADED_STATE, appData: response }   
         }),
         startWith({ dataState: DataState.LOADING_STATE }),
         catchError((error: string) => {
           this.notifier.onError(error);
-          return of({ dataState: DataState.ERROR_STATE, error })
+          console.log(error)
+          return of({ dataState: DataState.ERROR_STATE, error });
         })
       );
   }
 
   pingServer(ipAddress: string): void {
-    this.filterSubject.next(ipAddress)
+    this.filterSubject.next(ipAddress);
     this.appState$ = this.serverService.ping$(ipAddress)
       .pipe(
         map(response => {
@@ -64,21 +66,6 @@ export class AppComponent implements OnInit {
         catchError((error: string) => {
           this.filterSubject.next('');
           this.notifier.onError(error);
-          return of({ dataState: DataState.ERROR_STATE, error })
-        })
-      );
-  }
-
-  filterServers(status: Status): void {
-    this.appState$ = this.serverService.filter$(status , this.dataSubject.value)
-      .pipe(
-        map(response => {
-          this.notifier.onDefault(response.message);
-          return { dataState: DataState.LOADED_STATE, appData: response }
-        }),
-        startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
-        catchError((error: string) => {
-          this.notifier.onError(error);
           return of({ dataState: DataState.ERROR_STATE, error });
         })
       );
@@ -93,16 +80,31 @@ export class AppComponent implements OnInit {
             {...response, data: { servers: [response.data.server, ...this.dataSubject.value.data.servers] } }
           );
           this.notifier.onDefault(response.message);
-          document.getElementById('clostModal').click();
+          document.getElementById('closeModal').click();
           this.isLoading.next(false);
           serverForm.resetForm( { status: this.Status.SERVER_DOWN } );
-          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }
+          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value };
         }),
         startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
         catchError((error: string) => {
           this.isLoading.next(false);
           this.notifier.onError(error);
-          return of({ dataState: DataState.ERROR_STATE, error })
+          return of({ dataState: DataState.ERROR_STATE, error });
+        })
+      );
+  }
+
+  filterServers(status: Status): void {
+    this.appState$ = this.serverService.filter$(status, this.dataSubject.value)
+      .pipe(
+        map(response => {
+          this.notifier.onDefault(response.message);
+          return { dataState: DataState.LOADED_STATE, appData: response };
+        }),
+        startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
+        catchError((error: string) => {
+          this.notifier.onError(error);
+          return of({ dataState: DataState.ERROR_STATE, error });
         })
       );
   }
@@ -115,13 +117,12 @@ export class AppComponent implements OnInit {
             { ...response, data: { servers: this.dataSubject.value.data.servers.filter(s => s.id !== server.id) } }
           );
           this.notifier.onDefault(response.message);
-          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }
+          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value };
         }),
         startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
         catchError((error: string) => {
-          this.filterSubject.next('');
           this.notifier.onError(error);
-          return of({ dataState: DataState.ERROR_STATE, error })
+          return of({ dataState: DataState.ERROR_STATE, error });
         })
       );
   }

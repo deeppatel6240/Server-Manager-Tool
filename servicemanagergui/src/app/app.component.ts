@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
         map(response => {
           this.notifier.onDefault(response.message);
           this.dataSubject.next(response);
-          return { dataState: DataState.LOADED_STATE, appData: { ...response, data: { servers: response.data.servers.reverse() } } }
+          return { dataState: DataState.LOADED_STATE, appData: { ...response, data: { servers: response.data.servers?.reverse() } } }
           // return { dataState: DataState.LOADED_STATE, appData: response }   
         }),
         startWith({ dataState: DataState.LOADING_STATE }),

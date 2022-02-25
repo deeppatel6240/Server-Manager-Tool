@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1205acbb-3ba5-46bc-8683-72551db34628" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/ServicemanagerapiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/ServicemanagerapiApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servicemanagergui/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagergui/src/app/app.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servicemanagergui/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagergui/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servicemanagergui/src/app/service/server.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagergui/src/app/service/server.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servicemanagergui/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagergui/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servicemanagergui/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagergui/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servicemanagergui/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagergui/src/app/app.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +83,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SparkAssignments" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />

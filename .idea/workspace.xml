@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1205acbb-3ba5-46bc-8683-72551db34628" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/resources/ServerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/resources/ServerResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servicemanagergui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagergui/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servicemanagergui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagergui/package.json" afterDir="false" />
@@ -13,6 +14,8 @@
       <change beforePath="$PROJECT_DIR$/servicemanagergui/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagergui/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servicemanagergui/src/app/interface/custom-response.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagergui/src/app/interface/custom-response.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servicemanagergui/src/app/service/server.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagergui/src/app/service/server.service.ts" afterDir="false" />
+=======
+>>>>>>> SMT-1.0.0
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

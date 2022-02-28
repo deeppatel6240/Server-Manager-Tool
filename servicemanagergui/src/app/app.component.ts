@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { BehaviorSubject, catchError, map, Observable, of, retry, startWith } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, map, startWith } from 'rxjs/operators';
 import { DataState } from './enum/data-state.enum';
 import { Status } from './enum/status.enum';
 import { AppState } from './interface/app-state';
@@ -16,18 +17,15 @@ import { ServerService } from './service/server.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-  title = 'servicemanagergui';
-
   appState$: Observable<AppState<CustomResponse>>;
-
   readonly DataState = DataState;
   readonly Status = Status;
   private filterSubject = new BehaviorSubject<string>('');
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
-  private isLoading = new BehaviorSubject<boolean>(false);
-
   filterStatus$ = this.filterSubject.asObservable();
+  private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
+
 
   constructor(private serverService: ServerService, private notifier: NotificationService) { }
 
@@ -37,13 +35,13 @@ export class AppComponent implements OnInit {
         map(response => {
           this.notifier.onDefault(response.message);
           this.dataSubject.next(response);
-          return { dataState: DataState.LOADED_STATE, appData: { ...response, data: { servers: response.data.servers?.reverse() } } }
-          // return { dataState: DataState.LOADED_STATE, appData: response }   
+          console.log("this is reponse")
+          console.log(response)
+          return { dataState: DataState.LOADED_STATE, appData: { ...response, data: { servers: response.data.servers.reverse() } } }
         }),
         startWith({ dataState: DataState.LOADING_STATE }),
         catchError((error: string) => {
           this.notifier.onError(error);
-          console.log(error)
           return of({ dataState: DataState.ERROR_STATE, error });
         })
       );
@@ -54,9 +52,7 @@ export class AppComponent implements OnInit {
     this.appState$ = this.serverService.ping$(ipAddress)
       .pipe(
         map(response => {
-          const index = this.dataSubject.value.data.servers.findIndex(server =>
-            server.id === response.data.server.id);
-
+          const index = this.dataSubject.value.data.servers.findIndex(server =>  server.id === response.data.server.id);
           this.dataSubject.value.data.servers[index] = response.data.server;
           this.notifier.onDefault(response.message);
           this.filterSubject.next('');
@@ -82,8 +78,8 @@ export class AppComponent implements OnInit {
           this.notifier.onDefault(response.message);
           document.getElementById('closeModal').click();
           this.isLoading.next(false);
-          serverForm.resetForm( { status: this.Status.SERVER_DOWN } );
-          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value };
+          serverForm.resetForm({ status: this.Status.SERVER_DOWN });
+          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }
         }),
         startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
         catchError((error: string) => {
@@ -92,7 +88,7 @@ export class AppComponent implements OnInit {
           return of({ dataState: DataState.ERROR_STATE, error });
         })
       );
-  }
+}
 
   filterServers(status: Status): void {
     this.appState$ = this.serverService.filter$(status, this.dataSubject.value)
@@ -114,10 +110,11 @@ export class AppComponent implements OnInit {
       .pipe(
         map(response => {
           this.dataSubject.next(
-            { ...response, data: { servers: this.dataSubject.value.data.servers.filter(s => s.id !== server.id) } }
+            { ...response, data: 
+              { servers: this.dataSubject.value.data.servers.filter(s => s.id !== server.id)} }
           );
           this.notifier.onDefault(response.message);
-          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value };
+          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }
         }),
         startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
         catchError((error: string) => {
@@ -128,18 +125,16 @@ export class AppComponent implements OnInit {
   }
 
   printReport(): void {
-    this.notifier.onDefault('Report Downloaded Successfully!');
+    this.notifier.onDefault('Report downloaded');
+    // window.print();
     let dataType = 'application/vnd.ms-excel.sheet.macroEnabled.12';
     let tableSelect = document.getElementById('servers');
     let tableHtml = tableSelect.outerHTML.replace(/ /g, '%20');
     let downloadLink = document.createElement('a');
-
     document.body.appendChild(downloadLink);
     downloadLink.href = 'data:' + dataType + ', ' + tableHtml;
     downloadLink.download = 'server-report.xls';
     downloadLink.click();
-    
     document.body.removeChild(downloadLink);
-
   }
 }

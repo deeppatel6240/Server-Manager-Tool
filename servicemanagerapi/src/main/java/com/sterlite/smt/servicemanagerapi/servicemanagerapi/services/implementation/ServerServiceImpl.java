@@ -5,6 +5,7 @@ package com.sterlite.smt.servicemanagerapi.servicemanagerapi.services.implementa
  * date: 21/02/2022
  */
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.enumeration.Status;
+import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerNotFoundException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.model.Server;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.repositories.ServerRepo;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.services.ServerService;
@@ -20,8 +21,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.Collection;
-import java.util.Random;
+import java.util.*;
 
 import static java.lang.Boolean.TRUE;
 
@@ -58,22 +58,28 @@ public class ServerServiceImpl implements ServerService {
     }
 
     @Override
-    public Server get(Long id) {
+    public Server get(Long id) throws ServerNotFoundException {
         log.info("Fetching server by id: {}", id);
-        return serverRepo.findById(id).get();
+        Optional<Server> getServerById = serverRepo.findById(id);
+        return getServerById.orElseThrow(() -> new ServerNotFoundException("Sorry! Server id: " +
+                id + " is not found."));
     }
 
     @Override
     public Server update(Server server) {
-        log.info("Updating server: {}", server.getName());
+        log.info("Updating server: {}", server.getId());
         return serverRepo.save(server);
     }
 
     @Override
-    public Boolean delete(Long id) {
+    public Map<String, Boolean> delete(Long id) throws ServerNotFoundException {
         log.info("Deleting server by id: {}", id);
+        Server getServerById = serverRepo.findById(id).orElseThrow(() -> new ServerNotFoundException("Sorry! Server id: " +
+                id + " is not exist."));
         serverRepo.deleteById(id);
-        return TRUE;
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", TRUE);
+        return response;
     }
 
     private String setServerImageUrl() {

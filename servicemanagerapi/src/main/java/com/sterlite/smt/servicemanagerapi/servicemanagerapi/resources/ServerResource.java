@@ -6,10 +6,12 @@ package com.sterlite.smt.servicemanagerapi.servicemanagerapi.resources;
  */
 
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.enumeration.Status;
+import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerNotFoundException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.model.Response;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.model.Server;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.services.implementation.ServerServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,11 +25,14 @@ import java.util.Map;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
+
 
 @RestController
 @RequestMapping("/server")
 @RequiredArgsConstructor
+@Slf4j
 public class ServerResource {
 
     @Autowired
@@ -77,28 +82,54 @@ public class ServerResource {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<Response> getServer(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(LocalDateTime.now())
-                        .data(Map.of("server", serverService.get(id)))
-                        .message("Server retrieved")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+        try {
+            return ResponseEntity.ok(
+                    Response.builder()
+                            .timeStamp(LocalDateTime.now())
+                            .data(Map.of("server", serverService.get(id)))
+                            .message("Server retrieved")
+                            .status(OK)
+                            .statusCode(OK.value())
+                            .build()
+                    );
+        }
+        catch (ServerNotFoundException serverNotFoundException){
+             log.error("Server id: {} is not found", id);
+             return ResponseEntity.ok(
+                     Response.builder()
+                             .timeStamp(LocalDateTime.now())
+                             .message(serverNotFoundException.getMessage())
+                             .status(INTERNAL_SERVER_ERROR)
+                             .statusCode(INTERNAL_SERVER_ERROR.value())
+                             .build()
+             );
+        }
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Response> deleteServer(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(LocalDateTime.now())
-                        .data(Map.of("deleted", serverService.delete(id)))
-                        .message("Server deleted successfully")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
-        );
+        try {
+            return ResponseEntity.ok(
+                    Response.builder()
+                            .timeStamp(LocalDateTime.now())
+                            .data(Map.of("deleted", serverService.delete(id)))
+                            .message("Server deleted successfully")
+                            .status(OK)
+                            .statusCode(OK.value())
+                            .build()
+            );
+        }
+        catch (ServerNotFoundException serverNotFoundException) {
+            log.error("Server id: {} is not exist", id);
+            return ResponseEntity.ok(
+                    Response.builder()
+                            .timeStamp(LocalDateTime.now())
+                            .message(serverNotFoundException.getMessage())
+                            .status(INTERNAL_SERVER_ERROR)
+                            .statusCode(INTERNAL_SERVER_ERROR.value())
+                            .build()
+            );
+        }
     }
 
     @PutMapping("/save/{id}")

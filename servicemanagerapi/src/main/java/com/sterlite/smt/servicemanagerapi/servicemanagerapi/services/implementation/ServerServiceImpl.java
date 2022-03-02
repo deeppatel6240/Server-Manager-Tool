@@ -4,6 +4,7 @@ package com.sterlite.smt.servicemanagerapi.servicemanagerapi.services.implementa
  * version: 1.0
  * date: 21/02/2022
  */
+
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.enumeration.Status;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerAlreadyExistException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerNotFoundException;
@@ -12,6 +13,7 @@ import com.sterlite.smt.servicemanagerapi.servicemanagerapi.repositories.ServerR
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.services.ServerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -36,16 +38,16 @@ public class ServerServiceImpl implements ServerService {
     private final ServerRepo serverRepo;
 
     @Override
-    public Server create(Server server) throws ServerAlreadyExistException {
+    public Server create(Server server) throws Exception {
         log.info("Saving new server: {}", server.getName());
 
-        Optional<Server> serverRepoById = serverRepo.findById(server.getId());
+        String serverIpAddress = String.valueOf(serverRepo.findByIpAddress(server.getIpAddress()));
 
-        if (serverRepoById.isPresent()) {
-            throw new ServerAlreadyExistException("Server id already exist");
-        } else {
-            server.setImageUrl(setServerImageUrl());
+        if (serverIpAddress.equals(server.getIpAddress())){
+            throw new Exception("Server Ip already exist");
         }
+
+        server.setImageUrl(setServerImageUrl());
         return serverRepo.save(server);
     }
 

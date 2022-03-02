@@ -7,6 +7,8 @@
     <list default="true" id="d7873d18-603b-427d-9484-d9446c9042d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/resources/ServerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/resources/ServerResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/services/ServerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/services/ServerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/services/implementation/ServerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/services/implementation/ServerServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +47,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RunManager">
     <configuration name="ServicemanagerapiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">

@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d7873d18-603b-427d-9484-d9446c9042d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/resources/ServerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/resources/ServerResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/services/implementation/ServerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/services/implementation/ServerServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +25,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="SMT-1.0.0" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -72,5 +79,16 @@
       <updated>1646111156603</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

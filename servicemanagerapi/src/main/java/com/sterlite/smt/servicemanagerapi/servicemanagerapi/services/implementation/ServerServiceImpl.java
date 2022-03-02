@@ -58,7 +58,7 @@ public class ServerServiceImpl implements ServerService {
     }
 
     @Override
-    public Server get(Long id) throws ServerNotFoundException {
+    public Server get(Long id) throws ServerNotFoundException, NumberFormatException {
         log.info("Fetching server by id: {}", id);
         Optional<Server> getServerById = serverRepo.findById(id);
         return getServerById.orElseThrow(() -> new ServerNotFoundException("Sorry! Server id: " +
@@ -72,7 +72,7 @@ public class ServerServiceImpl implements ServerService {
     }
 
     @Override
-    public Map<String, Boolean> delete(Long id) throws ServerNotFoundException {
+    public Map<String, Boolean> delete(Long id) throws ServerNotFoundException, NumberFormatException {
         log.info("Deleting server by id: {}", id);
         Server getServerById = serverRepo.findById(id).orElseThrow(() -> new ServerNotFoundException("Sorry! Server id: " +
                 id + " is not exist."));

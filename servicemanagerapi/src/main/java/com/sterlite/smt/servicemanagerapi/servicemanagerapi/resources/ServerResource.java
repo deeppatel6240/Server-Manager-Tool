@@ -23,9 +23,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 
 
@@ -81,12 +79,12 @@ public class ServerResource {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getServer(@PathVariable("id") Long id) {
+    public ResponseEntity<Response> getServer(@PathVariable("id") String id) {
         try {
             return ResponseEntity.ok(
                     Response.builder()
                             .timeStamp(LocalDateTime.now())
-                            .data(Map.of("server", serverService.get(id)))
+                            .data(Map.of("server", serverService.get(Long.valueOf(id))))
                             .message("Server retrieved")
                             .status(OK)
                             .statusCode(OK.value())
@@ -104,15 +102,26 @@ public class ServerResource {
                              .build()
              );
         }
+        catch (NumberFormatException n){
+            log.error("Server id should be in integer");
+            return ResponseEntity.ok(
+                    Response.builder()
+                            .timeStamp(LocalDateTime.now())
+                            .message("Server id is should be in integer")
+                            .status(BAD_REQUEST)
+                            .statusCode(BAD_REQUEST.value())
+                            .build()
+            );
+        }
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteServer(@PathVariable("id") Long id) {
+    public ResponseEntity<Response> deleteServer(@PathVariable("id") String id) {
         try {
             return ResponseEntity.ok(
                     Response.builder()
                             .timeStamp(LocalDateTime.now())
-                            .data(serverService.delete(id))
+                            .data(serverService.delete(Long.valueOf(id)))
                             .message("Server deleted successfully")
                             .status(OK)
                             .statusCode(OK.value())
@@ -127,6 +136,17 @@ public class ServerResource {
                             .message(serverNotFoundException.getMessage())
                             .status(INTERNAL_SERVER_ERROR)
                             .statusCode(INTERNAL_SERVER_ERROR.value())
+                            .build()
+            );
+        }
+        catch (NumberFormatException n){
+            log.error("Server id should be in integer");
+            return ResponseEntity.ok(
+                    Response.builder()
+                            .timeStamp(LocalDateTime.now())
+                            .message("Server id is should be in integer")
+                            .status(BAD_REQUEST)
+                            .statusCode(BAD_REQUEST.value())
                             .build()
             );
         }

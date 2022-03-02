@@ -6,6 +6,7 @@ package com.sterlite.smt.servicemanagerapi.servicemanagerapi.resources;
  */
 
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.enumeration.Status;
+import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerAlreadyExistException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerNotFoundException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.model.Response;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.model.Server;
@@ -66,16 +67,29 @@ public class ServerResource {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Response> saveServer(@RequestBody @Valid Server server) {
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(LocalDateTime.now())
-                        .data(Map.of("server", serverService.create(server)))
-                        .message("Server Created successfully")
-                        .status(CREATED)
-                        .statusCode(CREATED.value())
-                        .build()
-        );
+    public ResponseEntity<Response> saveServer(@RequestBody @Valid Server server) throws ServerAlreadyExistException {
+        try {
+            return ResponseEntity.ok(
+                    Response.builder()
+                            .timeStamp(LocalDateTime.now())
+                            .data(Map.of("server", serverService.create(server)))
+                            .message("Server Created successfully")
+                            .status(CREATED)
+                            .statusCode(CREATED.value())
+                            .build()
+            );
+        }
+        catch (ServerAlreadyExistException serverAlreadyExistException){
+            log.error("Server id: {} already exist", server.getId());
+            return ResponseEntity.ok(
+                    Response.builder()
+                            .timeStamp(LocalDateTime.now())
+                            .message(serverAlreadyExistException.getMessage())
+                            .status(INTERNAL_SERVER_ERROR)
+                            .statusCode(INTERNAL_SERVER_ERROR.value())
+                            .build()
+            );
+        }
     }
 
     @GetMapping("/get/{id}")

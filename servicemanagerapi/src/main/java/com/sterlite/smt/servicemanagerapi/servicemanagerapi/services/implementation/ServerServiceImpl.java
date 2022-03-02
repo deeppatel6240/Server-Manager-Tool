@@ -5,6 +5,7 @@ package com.sterlite.smt.servicemanagerapi.servicemanagerapi.services.implementa
  * date: 21/02/2022
  */
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.enumeration.Status;
+import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerAlreadyExistException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerNotFoundException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.model.Server;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.repositories.ServerRepo;
@@ -35,9 +36,16 @@ public class ServerServiceImpl implements ServerService {
     private final ServerRepo serverRepo;
 
     @Override
-    public Server create(Server server) {
+    public Server create(Server server) throws ServerAlreadyExistException {
         log.info("Saving new server: {}", server.getName());
-        server.setImageUrl(setServerImageUrl());
+
+        Optional<Server> serverRepoById = serverRepo.findById(server.getId());
+
+        if (serverRepoById.isPresent()) {
+            throw new ServerAlreadyExistException("Server id already exist");
+        } else {
+            server.setImageUrl(setServerImageUrl());
+        }
         return serverRepo.save(server);
     }
 
@@ -74,7 +82,7 @@ public class ServerServiceImpl implements ServerService {
     @Override
     public Map<String, Boolean> delete(Long id) throws ServerNotFoundException, NumberFormatException {
         log.info("Deleting server by id: {}", id);
-        Server getServerById = serverRepo.findById(id).orElseThrow(() -> new ServerNotFoundException("Sorry! Server id: " +
+        Server getServerByIdDelete = serverRepo.findById(id).orElseThrow(() -> new ServerNotFoundException("Sorry! Server id: " +
                 id + " is not exist."));
         serverRepo.deleteById(id);
         Map<String, Boolean> response = new HashMap<>();
@@ -88,9 +96,9 @@ public class ServerServiceImpl implements ServerService {
                 .path("/server/image/" + imageNames[new Random().nextInt(5)]).toUriString();
     }
 
-    private boolean isReachable(String ipAddress, int port, int timeOut){
+    private boolean isReachable(String ipAddress, int port, int timeOut) {
         try {
-            try(Socket socket = new Socket()){
+            try (Socket socket = new Socket()) {
                 socket.connect(new InetSocketAddress(ipAddress, port), timeOut);
             }
             return true;

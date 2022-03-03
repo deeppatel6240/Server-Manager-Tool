@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d7873d18-603b-427d-9484-d9446c9042d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/model/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/model/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/resources/ServerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/resources/ServerResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/services/ServerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/services/ServerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/services/implementation/ServerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/java/com/sterlite/smt/servicemanagerapi/servicemanagerapi/services/implementation/ServerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servicemanagerapi/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/servicemanagerapi/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +33,14 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

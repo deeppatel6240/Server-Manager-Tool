@@ -6,7 +6,6 @@ package com.sterlite.smt.servicemanagerapi.servicemanagerapi.resources;
  */
 
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.enumeration.Status;
-import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.IpAddressAlreadyExistException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerAlreadyExistException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerNotFoundException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.model.Response;
@@ -79,12 +78,12 @@ public class ServerResource {
                             .statusCode(CREATED.value())
                             .build()
             );
-        } catch (Exception ipAddressAlreadyExistException) {
+        } catch (ServerAlreadyExistException serverAlreadyExistException) {
             log.error("Server ipAddress: {} already exist", server.getIpAddress());
             return ResponseEntity.ok(
                     Response.builder()
                             .timeStamp(LocalDateTime.now())
-                            .message("Server Ip already exist")
+                            .message(serverAlreadyExistException.getMessage())
                             .status(INTERNAL_SERVER_ERROR)
                             .statusCode(INTERNAL_SERVER_ERROR.value())
                             .build()

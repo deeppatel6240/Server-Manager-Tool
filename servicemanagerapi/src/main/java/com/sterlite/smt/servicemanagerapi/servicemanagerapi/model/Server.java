@@ -38,4 +38,16 @@ public class Server {
     private String imageUrl;
     private Status status;
 
+    @Override
+    public String toString() {
+        return "Server{" +
+                "id=" + id +
+                ", ipAddress='" + ipAddress + '\'' +
+                ", name='" + name + '\'' +
+                ", memory='" + memory + '\'' +
+                ", type='" + type + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

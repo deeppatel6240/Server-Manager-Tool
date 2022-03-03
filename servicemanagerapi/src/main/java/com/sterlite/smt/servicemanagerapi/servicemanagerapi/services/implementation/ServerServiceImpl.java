@@ -6,6 +6,7 @@ package com.sterlite.smt.servicemanagerapi.servicemanagerapi.services.implementa
  */
 
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.enumeration.Status;
+import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.IpAddressAlreadyExistException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerAlreadyExistException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.exceptions.ServerNotFoundException;
 import com.sterlite.smt.servicemanagerapi.servicemanagerapi.model.Server;
@@ -38,13 +39,14 @@ public class ServerServiceImpl implements ServerService {
     private final ServerRepo serverRepo;
 
     @Override
-    public Server create(Server server) throws Exception {
+    public Server create(Server server) throws ServerAlreadyExistException {
         log.info("Saving new server: {}", server.getName());
 
-        String serverIpAddress = String.valueOf(serverRepo.findByIpAddress(server.getIpAddress()));
+        Server serverIpAddress = serverRepo.findByIpAddress(server.getIpAddress());
 
-        if (serverIpAddress.equals(server.getIpAddress())){
-            throw new Exception("Server Ip already exist");
+        if (serverIpAddress != null){
+            log.info(String.valueOf(serverIpAddress));
+            throw new ServerAlreadyExistException("Server Ip already exist");
         }
 
         server.setImageUrl(setServerImageUrl());
